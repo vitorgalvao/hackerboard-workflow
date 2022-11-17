@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+List_file = "#{ENV['alfred_workflow_cache']}/hackernews_list.json"
+
+# Recheck if list file does not exist or is older than one hour or argument asks for it
+if !File.exist?(List_file) || (((Time.now - File.mtime(List_file)) / 3600).ceil > 1) || ARGV[0] == 'update_list'
+  require 'json'
+  require 'open-uri'
+  require 'rss'
+
+  Dir.mkdir(ENV['alfred_workflow_cache']) unless Dir.exist?(ENV['alfred_workflow_cache'])
+
+  script_filter_items = []
+
+  RSS::Parser.parse(URI('https://news.ycombinator.com/rss').open).items.each do |item|
+    if ENV['default_comments'] == '1'
+      main_link = item.comments
+      secondary_link = item.link
+      alt_message = 'Open linked website'
+    else
+      main_link = item.link
+      secondary_link = item.comments
+      alt_message = 'Open comments thread'
+    end
+
+    script_filter_items.push(
+      title: item.title, subtitle: item.link, arg: main_link,
+      mods: {
+        alt: { title: item.title, subtitle: alt_message, arg: secondary_link }
+      }
+    )
+  end
+
+  File.write(List_file, { items: script_filter_items }.to_json)
+end
+
+# Output list
+puts File.open(List_file, &:read).to_s

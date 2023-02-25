@@ -33,16 +33,13 @@
 				<key>vitoclose</key>
 				<true/>
 			</dict>
-		</array>
-		<key>B3A95060-C1AC-4847-BD1E-0A6A0D0580B1</key>
-		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>22A9DF1E-82B7-4771-A27E-D18CDF3987CE</string>
 				<key>modifiers</key>
-				<integer>0</integer>
+				<integer>8388608</integer>
 				<key>modifiersubtext</key>
-				<string></string>
+				<string>Force Cache Update</string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -131,27 +128,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>argumenttype</key>
-				<integer>2</integer>
-				<key>keyword</key>
-				<string>:hackerboardforceupdate</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Force Hackerboard Cache Rebuild</string>
-				<key>withspace</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>B3A95060-C1AC-4847-BD1E-0A6A0D0580B1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -197,7 +173,7 @@ Search Hacker News front page links via the Hacker News Keyword (default: `hn`).
 
 Press &lt;kbd&gt;↩&lt;/kbd&gt; to open the linked website or &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; to open the Hacker News comments thread. This behaviour can be reversed in the [Workflow’s Configuration](https://www.alfredapp.com/help/workflows/user-configuration/).
 
-News are fetched if it’s been over an hour since the last run. If necessary, an immediate cache rebuild can be forced with the `:hackerboardforceupdate` keyword.</string>
+News are fetched if it’s been over an hour since the last run. An immediate cache rebuild can be forced with &lt;kbd&gt;fn&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt;.</string>
 	<key>uidata</key>
 	<dict>
 		<key>22A9DF1E-82B7-4771-A27E-D18CDF3987CE</key>
@@ -219,7 +195,7 @@ News are fetched if it’s been over an hour since the last run. If necessary, a
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
-			<real>285</real>
+			<real>155</real>
 		</dict>
 		<key>81D415C5-CA65-4F79-9F94-BC4161B14D81</key>
 		<dict>
@@ -227,13 +203,6 @@ News are fetched if it’s been over an hour since the last run. If necessary, a
 			<real>30</real>
 			<key>ypos</key>
 			<real>25</real>
-		</dict>
-		<key>B3A95060-C1AC-4847-BD1E-0A6A0D0580B1</key>
-		<dict>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>155</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -280,7 +249,7 @@ News are fetched if it’s been over an hour since the last run. If necessary, a
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2022.1</string>
+	<string>2023.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/vitorgalvao/hackerboard-workflow/</string>
 </dict>

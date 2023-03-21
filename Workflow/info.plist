@@ -6,13 +6,11 @@
 	<string>com.vitorgalvao.alfred.hackerboard</string>
 	<key>connections</key>
 	<dict>
-		<key>50B4021B-BEB3-47B4-AE36-70254E107434</key>
-		<array/>
-		<key>533DD0B8-001B-4206-A27A-0134AC5CEDA7</key>
+		<key>4B33ACE9-D900-4C2F-AF05-CBBD028ABEA8</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>22A9DF1E-82B7-4771-A27E-D18CDF3987CE</string>
+				<string>D462A9D1-D59F-4249-B40E-04775A3F930A</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -21,6 +19,8 @@
 				<false/>
 			</dict>
 		</array>
+		<key>50B4021B-BEB3-47B4-AE36-70254E107434</key>
+		<array/>
 		<key>81D415C5-CA65-4F79-9F94-BC4161B14D81</key>
 		<array>
 			<dict>
@@ -35,11 +35,24 @@
 			</dict>
 			<dict>
 				<key>destinationuid</key>
-				<string>22A9DF1E-82B7-4771-A27E-D18CDF3987CE</string>
+				<string>4B33ACE9-D900-4C2F-AF05-CBBD028ABEA8</string>
 				<key>modifiers</key>
 				<integer>8388608</integer>
 				<key>modifiersubtext</key>
-				<string>Force Cache Update</string>
+				<string>Force Reset Cache</string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>D462A9D1-D59F-4249-B40E-04775A3F930A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EA242BFD-A940-46A7-92D7-DD9BEE9AE93D</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
@@ -118,6 +131,11 @@
 				<key>withspace</key>
 				<true/>
 			</dict>
+			<key>inboundconfig</key>
+			<dict>
+				<key>externalid</key>
+				<string>list_news</string>
+			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
@@ -128,38 +146,51 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>./hackerboard 'update_list'</string>
-				<key>scriptargtype</key>
-				<integer>1</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>5</integer>
+				<key>tasksettings</key>
+				<dict/>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.core/files-and-folders/path.trash</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.script</string>
+			<string>alfred.workflow.automation.task</string>
 			<key>uid</key>
-			<string>22A9DF1E-82B7-4771-A27E-D18CDF3987CE</string>
+			<string>D462A9D1-D59F-4249-B40E-04775A3F930A</string>
 			<key>version</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>availableviaurlhandler</key>
+				<key>externaltriggerid</key>
+				<string>list_news</string>
+				<key>passinputasargument</key>
 				<false/>
-				<key>triggerid</key>
-				<string>rebuild_cache</string>
+				<key>passvariables</key>
+				<false/>
+				<key>workflowbundleid</key>
+				<string>self</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.trigger.external</string>
+			<string>alfred.workflow.output.callexternaltrigger</string>
 			<key>uid</key>
-			<string>533DD0B8-001B-4206-A27A-0134AC5CEDA7</string>
+			<string>EA242BFD-A940-46A7-92D7-DD9BEE9AE93D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{const:alfred_workflow_cache}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>4B33ACE9-D900-4C2F-AF05-CBBD028ABEA8</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -167,7 +198,7 @@
 	<key>readme</key>
 	<string>## Usage
 
-Search Hacker News front page links via the Hacker News Keyword (default: `hn`).
+Search Hacker News front page links via the `hn` keyword.
 
 ![Hacker News front page links](images/about/hn.png)
 
@@ -176,12 +207,12 @@ Press &lt;kbd&gt;↩&lt;/kbd&gt; to open the linked website or &lt;kbd&gt;⌥&lt
 News are fetched if it’s been over an hour since the last run. An immediate cache rebuild can be forced with &lt;kbd&gt;fn&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt;.</string>
 	<key>uidata</key>
 	<dict>
-		<key>22A9DF1E-82B7-4771-A27E-D18CDF3987CE</key>
+		<key>4B33ACE9-D900-4C2F-AF05-CBBD028ABEA8</key>
 		<dict>
 			<key>xpos</key>
-			<real>310</real>
+			<real>210</real>
 			<key>ypos</key>
-			<real>155</real>
+			<real>190</real>
 		</dict>
 		<key>50B4021B-BEB3-47B4-AE36-70254E107434</key>
 		<dict>
@@ -190,19 +221,26 @@ News are fetched if it’s been over an hour since the last run. An immediate ca
 			<key>ypos</key>
 			<real>25</real>
 		</dict>
-		<key>533DD0B8-001B-4206-A27A-0134AC5CEDA7</key>
-		<dict>
-			<key>xpos</key>
-			<real>30</real>
-			<key>ypos</key>
-			<real>155</real>
-		</dict>
 		<key>81D415C5-CA65-4F79-9F94-BC4161B14D81</key>
 		<dict>
 			<key>xpos</key>
 			<real>30</real>
 			<key>ypos</key>
 			<real>25</real>
+		</dict>
+		<key>D462A9D1-D59F-4249-B40E-04775A3F930A</key>
+		<dict>
+			<key>xpos</key>
+			<real>310</real>
+			<key>ypos</key>
+			<real>160</real>
+		</dict>
+		<key>EA242BFD-A940-46A7-92D7-DD9BEE9AE93D</key>
+		<dict>
+			<key>xpos</key>
+			<real>490</real>
+			<key>ypos</key>
+			<real>160</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

@@ -287,7 +287,7 @@ News are fetched if it’s been over an hour since the last run. An immediate ca
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2023.1</string>
+	<string>2023.2</string>
 	<key>webaddress</key>
 	<string>https://github.com/vitorgalvao/hackerboard-workflow/</string>
 </dict>

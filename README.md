@@ -2,11 +2,11 @@
 
 Links from the front page of Hacker News
 
-<a href='https://alfred.app/workflows/vitor/hackerboard'>⤓ Install on the Alfred Gallery</a>
+[⤓ Install on the Alfred Gallery](https://alfred.app/workflows/vitor/hackerboard)
 
 ## Usage
 
-Search Hacker News front page links via the Hacker News Keyword (default: `hn`).
+Search Hacker News front page links via the `hn` keyword.
 
 ![Hacker News front page links](Workflow/images/about/hn.png)
 

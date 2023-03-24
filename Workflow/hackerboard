@@ -16,19 +16,24 @@ if !File.exist?(List_file) || (((Time.now - File.mtime(List_file)) / 3600).ceil 
 
   RSS::Parser.parse(URI('https://news.ycombinator.com/rss').open).items.each do |item|
     if ENV['default_comments'] == '1'
-      main_link = item.comments
+      primary_link = item.comments
       secondary_link = item.link
       alt_message = 'Open linked website'
     else
-      main_link = item.link
+      primary_link = item.link
       secondary_link = item.comments
       alt_message = 'Open comments thread'
     end
 
+    unescaped_title = CGI.unescapeHTML(item.title)
+
     script_filter_items.push(
-      title: CGI.unescapeHTML(item.title), subtitle: item.link, arg: main_link,
+      title: unescaped_title,
+      subtitle: item.link,
+      arg: primary_link,
+      match: "#{unescaped_title} #{item.link}",
       mods: {
-        alt: { title: item.title, subtitle: alt_message, arg: secondary_link }
+        alt: { subtitle: alt_message, arg: secondary_link }
       }
     )
   end

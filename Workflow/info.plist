@@ -39,7 +39,7 @@
 				<key>modifiers</key>
 				<integer>8388608</integer>
 				<key>modifiersubtext</key>
-				<string>Force Reset Cache</string>
+				<string>Force Cache Update</string>
 				<key>vitoclose</key>
 				<true/>
 			</dict>

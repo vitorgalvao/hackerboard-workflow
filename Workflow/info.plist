@@ -24,7 +24,7 @@
 				<key>destinationuid</key>
 				<string>D462A9D1-D59F-4249-B40E-04775A3F930A</string>
 				<key>modifiers</key>
-				<integer>8388608</integer>
+				<integer>1835008</integer>
 				<key>modifiersubtext</key>
 				<string>Force Cache Update</string>
 				<key>vitoclose</key>
@@ -177,7 +177,7 @@ Search Hacker News front page links via the `hn` keyword.
 
 Press &lt;kbd&gt;↩&lt;/kbd&gt; to open the linked website or &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; to open the Hacker News comments thread. This behaviour can be reversed in the [Workflow’s Configuration](https://www.alfredapp.com/help/workflows/user-configuration/).
 
-News are fetched if it’s been over an hour since the last run. An immediate cache rebuild can be forced with &lt;kbd&gt;fn&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt;.</string>
+News are fetched if it’s been over an hour since the last run. An immediate cache rebuild can be forced with &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt;.</string>
 	<key>uidata</key>
 	<dict>
 		<key>50B4021B-BEB3-47B4-AE36-70254E107434</key>

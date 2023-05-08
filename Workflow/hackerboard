@@ -4,7 +4,7 @@
 List_file = "#{ENV['alfred_workflow_cache']}/hackernews_list.json"
 
 # Recheck if list file does not exist or is older than one hour or argument asks for it
-if !File.exist?(List_file) || (((Time.now - File.mtime(List_file)) / 3600).ceil > 1) || ARGV[0] == 'update_list'
+if !File.exist?(List_file) || (((Time.now - File.mtime(List_file)) / 3600).ceil > 1)
   require 'cgi'
   require 'json'
   require 'open-uri'
@@ -12,9 +12,13 @@ if !File.exist?(List_file) || (((Time.now - File.mtime(List_file)) / 3600).ceil 
 
   Dir.mkdir(ENV['alfred_workflow_cache']) unless Dir.exist?(ENV['alfred_workflow_cache'])
 
+  Ignore_keywords = ENV['ignore_keywords'].downcase.split("\n")
   script_filter_items = []
 
   RSS::Parser.parse(URI('https://news.ycombinator.com/rss').open).items.each do |item|
+    next if Ignore_keywords.any? { |text| item.link.downcase.include?(text) }
+    next if Ignore_keywords.any? { |text| item.title.downcase.include?(text) }
+
     if ENV['default_comments'] == '1'
       primary_link = item.comments
       secondary_link = item.link

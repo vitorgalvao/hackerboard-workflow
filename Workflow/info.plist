@@ -251,6 +251,27 @@ News are fetched if it’s been over an hour since the last run. An immediate ca
 			<key>variable</key>
 			<string>default_comments</string>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+				<key>verticalsize</key>
+				<integer>9</integer>
+			</dict>
+			<key>description</key>
+			<string>Newline-separated case-insensitive list of words to ignore in titles and URLs.</string>
+			<key>label</key>
+			<string>Ignore Keywords</string>
+			<key>type</key>
+			<string>textarea</string>
+			<key>variable</key>
+			<string>ignore_keywords</string>
+		</dict>
 	</array>
 	<key>version</key>
 	<string>2023.4</string>

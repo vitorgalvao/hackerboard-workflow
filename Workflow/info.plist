@@ -109,6 +109,8 @@
 				<integer>1</integer>
 				<key>scriptfile</key>
 				<string>hackerboard</string>
+				<key>skipuniversalaction</key>
+				<true/>
 				<key>subtext</key>
 				<string></string>
 				<key>title</key>

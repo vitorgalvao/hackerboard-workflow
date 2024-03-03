@@ -6,6 +6,32 @@
 	<string>com.vitorgalvao.alfred.hackerboard</string>
 	<key>connections</key>
 	<dict>
+		<key>2E3C3E70-EF84-4222-99B9-363631BE386E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9F47BE8C-E36B-4A53-8BC2-A77BC2139A63</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>45F94D85-6D5C-4DA9-8CB8-82ECEEA7D434</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>50B4021B-BEB3-47B4-AE36-70254E107434</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
 		<key>50B4021B-BEB3-47B4-AE36-70254E107434</key>
 		<array/>
 		<key>81D415C5-CA65-4F79-9F94-BC4161B14D81</key>
@@ -20,22 +46,25 @@
 				<key>vitoclose</key>
 				<true/>
 			</dict>
+		</array>
+		<key>9F47BE8C-E36B-4A53-8BC2-A77BC2139A63</key>
+		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>D462A9D1-D59F-4249-B40E-04775A3F930A</string>
+				<string>838D1C35-83A9-41A3-863E-4ECE7D264EF4</string>
 				<key>modifiers</key>
-				<integer>1835008</integer>
+				<integer>0</integer>
 				<key>modifiersubtext</key>
-				<string>Force Cache Update</string>
+				<string></string>
 				<key>vitoclose</key>
 				<false/>
 			</dict>
 		</array>
-		<key>D462A9D1-D59F-4249-B40E-04775A3F930A</key>
+		<key>E2CD1D5D-BFBE-49AC-947E-35D043FD85F8</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>EA242BFD-A940-46A7-92D7-DD9BEE9AE93D</string>
+				<string>2E3C3E70-EF84-4222-99B9-363631BE386E</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -48,7 +77,7 @@
 	<key>createdby</key>
 	<string>Vítor Galvão</string>
 	<key>description</key>
-	<string>Links from the front page of Hacker News</string>
+	<string>Search and interact with Hacker News</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -92,7 +121,7 @@
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>keyword</key>
-				<string>{var:hackernews_keyword}</string>
+				<string>{var:frontpage_keyword}</string>
 				<key>queuedelaycustom</key>
 				<integer>3</integer>
 				<key>queuedelayimmediatelyinitially</key>
@@ -102,28 +131,24 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string>Getting news…</string>
+				<string>Getting stories…</string>
 				<key>script</key>
-				<string></string>
+				<string>export keep_cache='1'
+./hackerboard 'search?tags=front_page'</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>hackerboard</string>
+				<string></string>
 				<key>skipuniversalaction</key>
 				<true/>
 				<key>subtext</key>
-				<string></string>
+				<string>Search Hacker News front page</string>
 				<key>title</key>
-				<string>Hacker News</string>
+				<string>Hacker News Frontpage</string>
 				<key>type</key>
-				<integer>8</integer>
+				<integer>11</integer>
 				<key>withspace</key>
 				<true/>
-			</dict>
-			<key>inboundconfig</key>
-			<dict>
-				<key>externalid</key>
-				<string>show_list</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.input.scriptfilter</string>
@@ -135,37 +160,137 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>target_path</key>
-					<string>{const:alfred_workflow_cache}</string>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.core/files-and-folders/path.trash</string>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>2</integer>
+				<key>argumenttreatemptyqueryasnil</key>
+				<false/>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>{var:search_keyword}</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Getting stories…</string>
+				<key>script</key>
+				<string>readonly escaped_query="$(/usr/bin/osascript -l JavaScript -e 'function run(argv) { return encodeURIComponent(argv[0].normalize()).replace(/[!''()*]/g, (c) =&gt; `%${c.charCodeAt(0).toString(16).toUpperCase()}`) }' "${1}")"
+
+export keep_cache='0'
+./hackerboard "search?tags=story&amp;query=${escaped_query}"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>subtext</key>
+				<string>Search Hacker News stories</string>
+				<key>title</key>
+				<string>Hacker News Search</string>
+				<key>type</key>
+				<integer>11</integer>
+				<key>withspace</key>
+				<true/>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
+			<string>alfred.workflow.input.scriptfilter</string>
 			<key>uid</key>
-			<string>D462A9D1-D59F-4249-B40E-04775A3F930A</string>
+			<string>45F94D85-6D5C-4DA9-8CB8-82ECEEA7D434</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>2</integer>
+				<key>keyword</key>
+				<string>{var:submit_keyword}</string>
+				<key>skipuniversalaction</key>
+				<true/>
+				<key>subtext</key>
+				<string>Open page to submit frontmost browser tab</string>
+				<key>text</key>
+				<string>Submit to Hacker News</string>
+				<key>withspace</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>E2CD1D5D-BFBE-49AC-947E-35D043FD85F8</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>externaltriggerid</key>
-				<string>show_list</string>
-				<key>passinputasargument</key>
+				<key>browser</key>
+				<string></string>
+				<key>skipqueryencode</key>
+				<true/>
+				<key>skipvarencode</key>
 				<false/>
-				<key>passvariables</key>
-				<false/>
-				<key>workflowbundleid</key>
-				<string>self</string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>https://news.ycombinator.com/submitlink?u={var:split1}&amp;t={var:split2}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.output.callexternaltrigger</string>
+			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
-			<string>EA242BFD-A940-46A7-92D7-DD9BEE9AE93D</string>
+			<string>838D1C35-83A9-41A3-863E-4ECE7D264EF4</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>out_format</key>
+					<string>url_tab_title</string>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>2E3C3E70-EF84-4222-99B9-363631BE386E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>delimiter</key>
+				<string>	</string>
+				<key>discardemptyarguments</key>
+				<false/>
+				<key>outputas</key>
+				<integer>0</integer>
+				<key>trimarguments</key>
+				<true/>
+				<key>variableprefix</key>
+				<string>split</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.split</string>
+			<key>uid</key>
+			<string>9F47BE8C-E36B-4A53-8BC2-A77BC2139A63</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -173,42 +298,69 @@
 	<key>readme</key>
 	<string>## Usage
 
-Search Hacker News front page links via the `hn` keyword.
+Search Hacker News front page links via the `hnf` keyword.
 
-![Hacker News front page links](images/about/hn.png)
+![Hacker News front page links](images/about/hnf.png)
 
-Press &lt;kbd&gt;↩&lt;/kbd&gt; to open the linked website or &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; to open the Hacker News comments thread. This behaviour can be reversed in the [Workflow’s Configuration](https://www.alfredapp.com/help/workflows/user-configuration/).
+Seach every story with the `hns` keyword.
 
-News are fetched if it’s been over an hour since the last run. An immediate cache rebuild can be forced with &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;⌃&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt;.</string>
+![Searching Hacker News links](images/about/hns.png)
+
+Press &lt;kbd&gt;↩&lt;/kbd&gt; to open the story’s website or &lt;kbd&gt;⌥&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; to open the Hacker News comments thread. This behaviour can be reversed in the [Workflow’s Configuration](https://www.alfredapp.com/help/workflows/user-configuration/).
+
+Submit the frontmost browser tab with the `hnsubmit` keyword.
+
+![Submit to Hacker News](images/about/hnsubmit.png)</string>
 	<key>uidata</key>
 	<dict>
+		<key>2E3C3E70-EF84-4222-99B9-363631BE386E</key>
+		<dict>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>320</real>
+		</dict>
+		<key>45F94D85-6D5C-4DA9-8CB8-82ECEEA7D434</key>
+		<dict>
+			<key>xpos</key>
+			<real>45</real>
+			<key>ypos</key>
+			<real>180</real>
+		</dict>
 		<key>50B4021B-BEB3-47B4-AE36-70254E107434</key>
 		<dict>
 			<key>xpos</key>
-			<real>310</real>
+			<real>270</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>40</real>
 		</dict>
 		<key>81D415C5-CA65-4F79-9F94-BC4161B14D81</key>
 		<dict>
 			<key>xpos</key>
-			<real>30</real>
+			<real>45</real>
 			<key>ypos</key>
-			<real>25</real>
+			<real>40</real>
 		</dict>
-		<key>D462A9D1-D59F-4249-B40E-04775A3F930A</key>
+		<key>838D1C35-83A9-41A3-863E-4ECE7D264EF4</key>
 		<dict>
 			<key>xpos</key>
-			<real>310</real>
+			<real>530</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>320</real>
 		</dict>
-		<key>EA242BFD-A940-46A7-92D7-DD9BEE9AE93D</key>
+		<key>9F47BE8C-E36B-4A53-8BC2-A77BC2139A63</key>
 		<dict>
 			<key>xpos</key>
-			<real>490</real>
+			<real>440</real>
 			<key>ypos</key>
-			<real>160</real>
+			<real>350</real>
+		</dict>
+		<key>E2CD1D5D-BFBE-49AC-947E-35D043FD85F8</key>
+		<dict>
+			<key>xpos</key>
+			<real>45</real>
+			<key>ypos</key>
+			<real>320</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>
@@ -217,7 +369,7 @@ News are fetched if it’s been over an hour since the last run. An immediate ca
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<string>hn</string>
+				<string>hnf</string>
 				<key>placeholder</key>
 				<string></string>
 				<key>required</key>
@@ -228,11 +380,53 @@ News are fetched if it’s been over an hour since the last run. An immediate ca
 			<key>description</key>
 			<string></string>
 			<key>label</key>
-			<string>Hacker News Keyword</string>
+			<string>Frontpage Keyword</string>
 			<key>type</key>
 			<string>textfield</string>
 			<key>variable</key>
-			<string>hackernews_keyword</string>
+			<string>frontpage_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>hns</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Search Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>search_keyword</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string>hnsubmit</string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string></string>
+			<key>label</key>
+			<string>Submit Keyword</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>submit_keyword</string>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -242,12 +436,12 @@ News are fetched if it’s been over an hour since the last run. An immediate ca
 				<key>required</key>
 				<false/>
 				<key>text</key>
-				<string>Open comments thread instead of article link</string>
+				<string>Open comments thread instead of story link</string>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>⌥↩ opens the opposite.</string>
 			<key>label</key>
-			<string>Default to Comments</string>
+			<string>Default URL</string>
 			<key>type</key>
 			<string>checkbox</string>
 			<key>variable</key>

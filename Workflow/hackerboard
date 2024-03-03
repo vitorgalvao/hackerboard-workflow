@@ -1,49 +1,49 @@
-#!/usr/bin/env ruby
-# frozen_string_literal: true
+#!/usr/bin/osascript -l JavaScript
 
-List_file = "#{ENV['alfred_workflow_cache']}/hackernews_list.json"
+function envVar(varName) {
+  return $.NSProcessInfo
+    .processInfo
+    .environment
+    .objectForKey(varName).js
+}
 
-# Recheck if list file does not exist or is older than one hour or argument asks for it
-if !File.exist?(List_file) || (((Time.now - File.mtime(List_file)) / 3600).ceil > 1)
-  require 'cgi'
-  require 'json'
-  require 'open-uri'
-  require 'rss'
+function request(url) {
+  const queryURL = $.NSURL.URLWithString(url)
+  const requestData = $.NSData.dataWithContentsOfURL(queryURL)
+  const requestString = $.NSString.alloc.initWithDataEncoding(requestData, $.NSUTF8StringEncoding).js
+  return requestString
+}
 
-  Dir.mkdir(ENV['alfred_workflow_cache']) unless Dir.exist?(ENV['alfred_workflow_cache'])
+function run(argv) {
+  // Configuration
+  const commentsMain = envVar("default_comments") === "1"
+  const keepCache = envVar("keep_cache") === "1"
 
-  Ignore_keywords = ENV['ignore_keywords'].downcase.split("\n")
-  script_filter_items = []
+  // Grab items
+  const hnItems = JSON.parse(request(`https://hn.algolia.com/api/v1/${argv[0]}`))["hits"]
 
-  RSS::Parser.parse(URI('https://news.ycombinator.com/rss').open).items.each do |item|
-    next if Ignore_keywords.any? { |text| item.link.downcase.include?(text) }
-    next if Ignore_keywords.any? { |text| item.title.downcase.include?(text) }
+  // If no matches, exit early
+  if (hnItems.length === 0) return JSON.stringify({ items: [{ title: "No stories found", valid: false }]})
 
-    if ENV['default_comments'] == '1'
-      primary_link = item.comments
-      secondary_link = item.link
-      alt_message = 'Open linked website'
-    else
-      primary_link = item.link
-      secondary_link = item.comments
-      alt_message = 'Open comments thread'
-    end
+  // Build Items
+  const sfItems = hnItems.map(item => {
+    const storyPage = item["url"]
+    const commentsPage = `https://news.ycombinator.com/item?id=${item["story_id"]}`
+    const altMessage = commentsMain ? "Open story website" : "Open comments thread"
+    const mainURL = commentsMain ? commentsPage : storyPage
+    const altURL = commentsMain ? storyPage : commentsPage
 
-    unescaped_title = CGI.unescapeHTML(item.title)
+    return {
+      title: item["title"],
+      subtitle: `${item["points"]} points · ${item["num_comments"]} comments · ${storyPage}`,
+      arg: mainURL,
+      match: `${item["title"]} ${storyPage}`,
+      mods: { alt: { subtitle: altMessage, arg: altURL }}
+    }
+  })
 
-    script_filter_items.push(
-      title: unescaped_title,
-      subtitle: item.link,
-      arg: primary_link,
-      match: "#{unescaped_title} #{item.link}",
-      mods: {
-        alt: { subtitle: alt_message, arg: secondary_link }
-      }
-    )
-  end
-
-  File.write(List_file, { items: script_filter_items }.to_json)
-end
-
-# Output list
-puts File.open(List_file, &:read).to_s
+  // Output JSON
+  const sfObject = { items: sfItems }
+  if (keepCache) sfObject["cache"] = { seconds: 3600 }
+  return JSON.stringify(sfObject)
+}

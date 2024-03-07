@@ -37,6 +37,7 @@ function run(argv) {
       title: item["title"],
       subtitle: `${item["points"]} points · ${item["num_comments"]} comments · ${storyPage}`,
       arg: mainURL,
+      quicklookurl: storyPage,
       match: `${item["title"]} ${storyPage}`,
       mods: { alt: { subtitle: altMessage, arg: altURL }}
     }

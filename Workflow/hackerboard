@@ -16,7 +16,7 @@ function request(url) {
 
 function run(argv) {
   // Configuration
-  const commentsMain = envVar("default_comments") === "1"
+  const commentsMain = envVar("default_url") === "comments"
   const frontpageNews = envVar("frontpage") === "1"
   const ignoreKeywords = envVar("ignore_keywords").split("\n").flatMap(line => line === "" ? [] : line.toLowerCase())
 

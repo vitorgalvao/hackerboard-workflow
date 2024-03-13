@@ -627,7 +627,7 @@ Submit the frontmost browser tab with the `hnsubmit` keyword.
 				<true/>
 			</dict>
 			<key>description</key>
-			<string></string>
+			<string>Keywords to trigger the workflow.</string>
 			<key>label</key>
 			<string>Submit Keyword</string>
 			<key>type</key>
@@ -639,20 +639,27 @@ Submit the frontmost browser tab with the `hnsubmit` keyword.
 			<key>config</key>
 			<dict>
 				<key>default</key>
-				<false/>
-				<key>required</key>
-				<false/>
-				<key>text</key>
-				<string>Open comments thread instead of story link</string>
+				<string>story</string>
+				<key>pairs</key>
+				<array>
+					<array>
+						<string>Story Website</string>
+						<string>story</string>
+					</array>
+					<array>
+						<string>Comments Thread</string>
+						<string>comments</string>
+					</array>
+				</array>
 			</dict>
 			<key>description</key>
 			<string>⌥↩ opens the opposite.</string>
 			<key>label</key>
 			<string>Default URL</string>
 			<key>type</key>
-			<string>checkbox</string>
+			<string>popupbutton</string>
 			<key>variable</key>
-			<string>default_comments</string>
+			<string>default_url</string>
 		</dict>
 		<dict>
 			<key>config</key>

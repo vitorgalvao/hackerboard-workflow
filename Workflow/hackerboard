@@ -17,7 +17,7 @@ function request(url) {
 function run(argv) {
   // Configuration
   const commentsMain = envVar("default_comments") === "1"
-  const keepCache = envVar("keep_cache") === "1"
+  const frontpageNews = envVar("frontpage") === "1"
   const ignoreKeywords = envVar("ignore_keywords").split("\n").flatMap(line => line === "" ? [] : line.toLowerCase())
 
   // Grab items
@@ -34,13 +34,14 @@ function run(argv) {
     const altMessage = commentsMain ? "Open story website" : "Open comments thread"
     const mainURL = commentsMain ? commentsPage : storyPage
     const altURL = commentsMain ? storyPage : commentsPage
+    const createdAt = frontpageNews ? "" : `${item["created_at"].replace(/T.*/, "")} · `
 
     // Skip ignored
     if (ignoreKeywords.some(line => title.toLowerCase().includes(line) || storyPage.includes(line))) return []
 
     return {
       title: title,
-      subtitle: `${item["points"]} points · ${item["num_comments"]} comments · ${storyPage}`,
+      subtitle: `${item["points"]} points · ${item["num_comments"]} comments · ${createdAt}${storyPage}`,
       arg: mainURL,
       quicklookurl: storyPage,
       match: `${item["title"]} ${storyPage}`,
@@ -50,6 +51,6 @@ function run(argv) {
 
   // Output JSON
   const sfObject = { items: sfItems }
-  if (keepCache) sfObject["cache"] = { seconds: 3600 }
+  if (frontpageNews) sfObject["cache"] = { seconds: 3600 }
   return JSON.stringify(sfObject)
 }

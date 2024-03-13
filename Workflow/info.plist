@@ -133,7 +133,7 @@
 				<key>runningsubtext</key>
 				<string>Getting stories…</string>
 				<key>script</key>
-				<string>export keep_cache='1'
+				<string>export frontpage='1'
 ./hackerboard 'search?tags=front_page'</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -187,7 +187,7 @@
 				<key>script</key>
 				<string>readonly escaped_query="$(/usr/bin/osascript -l JavaScript -e 'function run(argv) { return encodeURIComponent(argv[0].normalize()).replace(/[!''()*]/g, (c) =&gt; `%${c.charCodeAt(0).toString(16).toUpperCase()}`) }' "${1}")"
 
-export keep_cache='0'
+export frontpage='0'
 ./hackerboard "search?tags=story&amp;query=${escaped_query}"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
@@ -214,6 +214,24 @@ export keep_cache='0'
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>out_format</key>
+					<string>url_tab_title</string>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>2E3C3E70-EF84-4222-99B9-363631BE386E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>argumenttype</key>
 				<integer>2</integer>
 				<key>keyword</key>
@@ -231,24 +249,6 @@ export keep_cache='0'
 			<string>alfred.workflow.input.keyword</string>
 			<key>uid</key>
 			<string>E2CD1D5D-BFBE-49AC-947E-35D043FD85F8</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>out_format</key>
-					<string>url_tab_title</string>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>2E3C3E70-EF84-4222-99B9-363631BE386E</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>

@@ -50,7 +50,7 @@ function run(argv) {
   })
 
   // Output JSON
-  const sfObject = { items: sfItems }
+  const sfObject = { variables: { search_query: envVar("search_query") }, items: sfItems }
   if (frontpageNews) sfObject["cache"] = { seconds: 3600 }
   return JSON.stringify(sfObject)
 }

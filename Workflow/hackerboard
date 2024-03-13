@@ -27,8 +27,8 @@ function run(argv) {
 
   // Build Items
   const sfItems = hnItems.map(item => {
-    const storyPage = item["url"]
     const commentsPage = `https://news.ycombinator.com/item?id=${item["story_id"]}`
+    const storyPage = item["url"] || commentsPage
     const altMessage = commentsMain ? "Open story website" : "Open comments thread"
     const mainURL = commentsMain ? commentsPage : storyPage
     const altURL = commentsMain ? storyPage : commentsPage

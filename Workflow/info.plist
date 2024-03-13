@@ -710,7 +710,7 @@ Submit the frontmost browser tab with the `hnsubmit` keyword.
 		</dict>
 	</array>
 	<key>version</key>
-	<string>2024.1</string>
+	<string>2024.2</string>
 	<key>webaddress</key>
 	<string>https://github.com/vitorgalvao/hackerboard-workflow/</string>
 </dict>

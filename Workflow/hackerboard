@@ -18,6 +18,7 @@ function run(argv) {
   // Configuration
   const commentsMain = envVar("default_comments") === "1"
   const keepCache = envVar("keep_cache") === "1"
+  const ignoreKeywords = envVar("ignore_keywords").split("\n").flatMap(line => line === "" ? [] : line.toLowerCase())
 
   // Grab items
   const hnItems = JSON.parse(request(`https://hn.algolia.com/api/v1/${argv[0]}`))["hits"]
@@ -26,15 +27,19 @@ function run(argv) {
   if (hnItems.length === 0) return JSON.stringify({ items: [{ title: "No stories found", valid: false }]})
 
   // Build Items
-  const sfItems = hnItems.map(item => {
+  const sfItems = hnItems.flatMap(item => {
+    const title = item["title"]
     const commentsPage = `https://news.ycombinator.com/item?id=${item["story_id"]}`
     const storyPage = item["url"] || commentsPage
     const altMessage = commentsMain ? "Open story website" : "Open comments thread"
     const mainURL = commentsMain ? commentsPage : storyPage
     const altURL = commentsMain ? storyPage : commentsPage
 
+    // Skip ignored
+    if (ignoreKeywords.some(line => title.toLowerCase().includes(line) || storyPage.includes(line))) return []
+
     return {
-      title: item["title"],
+      title: title,
       subtitle: `${item["points"]} points · ${item["num_comments"]} comments · ${storyPage}`,
       arg: mainURL,
       quicklookurl: storyPage,

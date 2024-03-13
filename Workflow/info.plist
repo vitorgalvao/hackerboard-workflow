@@ -237,6 +237,24 @@ export keep_cache='0'
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>tasksettings</key>
+				<dict>
+					<key>out_format</key>
+					<string>url_tab_title</string>
+				</dict>
+				<key>taskuid</key>
+				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.automation.task</string>
+			<key>uid</key>
+			<string>2E3C3E70-EF84-4222-99B9-363631BE386E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>browser</key>
 				<string></string>
 				<key>skipqueryencode</key>
@@ -252,24 +270,6 @@ export keep_cache='0'
 			<string>alfred.workflow.action.openurl</string>
 			<key>uid</key>
 			<string>838D1C35-83A9-41A3-863E-4ECE7D264EF4</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>tasksettings</key>
-				<dict>
-					<key>out_format</key>
-					<string>url_tab_title</string>
-				</dict>
-				<key>taskuid</key>
-				<string>com.alfredapp.automation.extras/web-browsers/frontmost-browser/frontmost.tabs.current</string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.automation.task</string>
-			<key>uid</key>
-			<string>2E3C3E70-EF84-4222-99B9-363631BE386E</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>

@@ -1,0 +1,31 @@
+#!/usr/bin/osascript -l JavaScript
+
+function encode(url) {
+  return encodeURIComponent(url.normalize()).replace(/[!'()*]/g, (c) => `%${c.charCodeAt(0).toString(16).toUpperCase()}`)
+}
+
+function run(argv) {
+  const maxChars = parseInt($.NSProcessInfo.processInfo.environment.objectForKey("maxChars").js)
+  const title = argv[0]
+  const url = argv[1]
+
+  if (title.length > maxChars) return JSON.stringify({ sound: { "src": "Basso" }})
+
+  return JSON.stringify({ replace: { ids: { mainview: {
+    shortcuts: [{ shortcut: "⌘O", action: {
+      type: "json",
+      variables: { url: "{value:browser.src}" },
+      src: {
+        open: { type: "url", src: "{var:url}" },
+        finish: {}
+      }
+    }}],
+    type: "view",
+    layout: "stack",
+    components: [{
+      id: "browser",
+      type: "webkitview",
+      src: `https://news.ycombinator.com/submitlink?u=${encode(url)}&t=${encode(title)}`
+    }]
+  }}}})
+}

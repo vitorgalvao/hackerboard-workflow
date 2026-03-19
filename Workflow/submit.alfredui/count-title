@@ -1,0 +1,12 @@
+#!/usr/bin/osascript -l JavaScript
+
+function run(argv) {
+  const maxChars = parseInt($.NSProcessInfo.processInfo.environment.objectForKey("maxChars").js)
+  const charCount = argv[0].length
+
+  const charText = charCount > maxChars ?
+    { text: `${charCount - maxChars} too long`, color: "systemRedColor" } :
+    { text: `${charCount} characters`, color: "secondaryLabelColor" }
+
+  return JSON.stringify({ update: { ids: { titleCount: charText }}})
+}

@@ -6,6 +6,19 @@
 	<string>com.vitorgalvao.alfred.hackerboard</string>
 	<key>connections</key>
 	<dict>
+		<key>095F02D9-0D09-4EC3-8D42-9F93E2CD86DC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>9F47BE8C-E36B-4A53-8BC2-A77BC2139A63</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>2E3C3E70-EF84-4222-99B9-363631BE386E</key>
 		<array>
 			<dict>
@@ -70,6 +83,21 @@
 				<true/>
 			</dict>
 		</array>
+		<key>89D23E6A-4FC3-49FE-8E83-28554F3233EF</key>
+		<array/>
+		<key>8CF98712-5942-40A4-AAEA-AAF104D977EC</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>095F02D9-0D09-4EC3-8D42-9F93E2CD86DC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>9EFA03D0-ED2A-421F-BE5E-774B46019580</key>
 		<array>
 			<dict>
@@ -101,7 +129,7 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>838D1C35-83A9-41A3-863E-4ECE7D264EF4</string>
+				<string>89D23E6A-4FC3-49FE-8E83-28554F3233EF</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -123,11 +151,37 @@
 				<false/>
 			</dict>
 		</array>
+		<key>E0E3E1EC-91CB-43F8-9625-2DD4DDED0703</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EBE26EEA-14F9-4DCC-86BD-4BB9427B8B82</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
 		<key>E2CD1D5D-BFBE-49AC-947E-35D043FD85F8</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>2E3C3E70-EF84-4222-99B9-363631BE386E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<true/>
+			</dict>
+		</array>
+		<key>EBE26EEA-14F9-4DCC-86BD-4BB9427B8B82</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>8CF98712-5942-40A4-AAEA-AAF104D977EC</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -414,21 +468,17 @@ export frontpage='0'
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>browser</key>
-				<string></string>
-				<key>skipqueryencode</key>
-				<true/>
-				<key>skipvarencode</key>
+				<key>launchmode</key>
+				<integer>0</integer>
+				<key>path</key>
+				<string>submit.alfredui</string>
+				<key>stackview</key>
 				<false/>
-				<key>spaces</key>
-				<string></string>
-				<key>url</key>
-				<string>https://news.ycombinator.com/submitlink?u={var:split1}&amp;t={var:split2}</string>
 			</dict>
 			<key>type</key>
-			<string>alfred.workflow.action.openurl</string>
+			<string>alfred.workflow.userinterface.alfredui</string>
 			<key>uid</key>
-			<string>838D1C35-83A9-41A3-863E-4ECE7D264EF4</string>
+			<string>89D23E6A-4FC3-49FE-8E83-28554F3233EF</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -458,16 +508,97 @@ export frontpage='0'
 				<key>discardemptyarguments</key>
 				<false/>
 				<key>outputas</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>trimarguments</key>
 				<true/>
 				<key>variableprefix</key>
-				<string>split</string>
+				<string></string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.split</string>
 			<key>uid</key>
 			<string>9F47BE8C-E36B-4A53-8BC2-A77BC2139A63</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>curl "${1}" | xmllint --html --xpath 'string(//title)' - | tr -d '\n'</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>11</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>8CF98712-5942-40A4-AAEA-AAF104D977EC</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsfiles</key>
+				<false/>
+				<key>acceptsmulti</key>
+				<integer>0</integer>
+				<key>acceptstext</key>
+				<false/>
+				<key>acceptsurls</key>
+				<true/>
+				<key>name</key>
+				<string>Submit to Hacker News</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.universalaction</string>
+			<key>uid</key>
+			<string>E0E3E1EC-91CB-43F8-9625-2DD4DDED0703</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string></string>
+				<key>passthroughargument</key>
+				<true/>
+				<key>variables</key>
+				<dict>
+					<key>url</key>
+					<string>{query}</string>
+				</dict>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>EBE26EEA-14F9-4DCC-86BD-4BB9427B8B82</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argument</key>
+				<string>{var:url}	{query}</string>
+				<key>passthroughargument</key>
+				<false/>
+				<key>variables</key>
+				<dict/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.argument</string>
+			<key>uid</key>
+			<string>095F02D9-0D09-4EC3-8D42-9F93E2CD86DC</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -489,9 +620,31 @@ Previous shortcuts apply, plus &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&
 
 Submit the frontmost browser tab with the `hnsubmit` keyword.
 
-![Submit to Hacker News](images/about/hnsubmit.png)</string>
+![Keyword to submit to Hacker News](images/about/hnsubmitkeyword.png)
+
+![Showing website to submit](images/about/submitweb.png)
+
+* &lt;kbd&gt;↩&lt;/kbd&gt; Submit (when a text field is focused).
+* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;↩&lt;/kbd&gt; Submit (when the webview is focused).
+* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;P&lt;/kbd&gt; Focus title field.
+* &lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;L&lt;/kbd&gt; Focus URL field.
+
+![Showing Hacker News submission interface](images/about/submithn.png)
+
+&lt;kbd&gt;⌘&lt;/kbd&gt;&lt;kbd&gt;O&lt;/kbd&gt; Open current page in web browser.
+
+Alternatively, submit a URL via the [Universal Action](https://www.alfredapp.com/help/features/universal-actions/).
+
+![Universal Action to submit to Hacker News](images/about/hnsubmitua.png)</string>
 	<key>uidata</key>
 	<dict>
+		<key>095F02D9-0D09-4EC3-8D42-9F93E2CD86DC</key>
+		<dict>
+			<key>xpos</key>
+			<real>440</real>
+			<key>ypos</key>
+			<real>490</real>
+		</dict>
 		<key>2E3C3E70-EF84-4222-99B9-363631BE386E</key>
 		<dict>
 			<key>xpos</key>
@@ -527,12 +680,21 @@ Submit the frontmost browser tab with the `hnsubmit` keyword.
 			<key>ypos</key>
 			<real>40</real>
 		</dict>
-		<key>838D1C35-83A9-41A3-863E-4ECE7D264EF4</key>
+		<key>89D23E6A-4FC3-49FE-8E83-28554F3233EF</key>
 		<dict>
 			<key>xpos</key>
 			<real>530</real>
 			<key>ypos</key>
 			<real>320</real>
+		</dict>
+		<key>8CF98712-5942-40A4-AAEA-AAF104D977EC</key>
+		<dict>
+			<key>note</key>
+			<string>Try to get title from page</string>
+			<key>xpos</key>
+			<real>270</real>
+			<key>ypos</key>
+			<real>460</real>
 		</dict>
 		<key>9EFA03D0-ED2A-421F-BE5E-774B46019580</key>
 		<dict>
@@ -562,12 +724,26 @@ Submit the frontmost browser tab with the `hnsubmit` keyword.
 			<key>ypos</key>
 			<real>160</real>
 		</dict>
+		<key>E0E3E1EC-91CB-43F8-9625-2DD4DDED0703</key>
+		<dict>
+			<key>xpos</key>
+			<real>45</real>
+			<key>ypos</key>
+			<real>460</real>
+		</dict>
 		<key>E2CD1D5D-BFBE-49AC-947E-35D043FD85F8</key>
 		<dict>
 			<key>xpos</key>
 			<real>45</real>
 			<key>ypos</key>
 			<real>320</real>
+		</dict>
+		<key>EBE26EEA-14F9-4DCC-86BD-4BB9427B8B82</key>
+		<dict>
+			<key>xpos</key>
+			<real>200</real>
+			<key>ypos</key>
+			<real>490</real>
 		</dict>
 	</dict>
 	<key>userconfigurationconfig</key>

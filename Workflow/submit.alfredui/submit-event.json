@@ -1,0 +1,8 @@
+{
+  "triggers": "actioned",
+  "action": {
+    "type": "script",
+    "src": "submit",
+    "args": [ "{value:titleField.text}", "{value:urlField.text}" ]
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "variablesconfig": {
+    "url": { "src": "args[0]" },
+    "title": { "src": "args[1]" },
+    "maxChars": { "default": 80, "scriptenv": true }
+  },
+  "window": {
+    "size": { "width": 816 },
+    "padding": 16,
+    "root":  {
+      "shortcuts": [
+        { "shortcut": "⌘L", "action": { "type": "json", "src": { "update": { "ids": { "urlField": { "focus": true } } } } } },
+        { "shortcut": "⌘P", "action": { "type": "json", "src": { "update": { "ids": { "titleField": { "focus": true } } } } } }
+      ],
+      "id": "mainview",
+      "type": "view",
+      "layout": "flex",
+      "rows": 3,
+      "cols": 3,
+      "spacing": 8,
+      "components": [
+        {
+          "constraints": { "position": "right", "grid": { "row": 0, "col": 0 } },
+          "type": "label",
+          "text": "Title",
+          "textalign": "right",
+          "color": "secondaryLabelColor"
+        },
+        {
+          "constraints": { "position": "right", "grid": { "row": 1, "col": 0 } },
+          "type": "label",
+          "text": "URL",
+          "textalign": "right",
+          "color": "secondaryLabelColor"
+        },
+        {
+          "id": "titleField",
+          "constraints": { "grid": { "row": 0, "col": 1, "colweight": 1 } },
+          "type": "textfield",
+          "text": "{var:title}",
+          "focusring": false,
+          "tooltip": "Title ⌘P",
+          "focus": true,
+          "events": [
+            {
+              "triggers": [ "preload", "changed" ],
+              "action": {
+                "type": "script",
+                "src": "count-title",
+                "args": "{value:self.text}"
+              }
+            },
+            "{file:submit-event.json}"
+          ]
+        },
+        {
+          "id": "urlField",
+          "constraints": { "grid": { "row": 1, "col": 1 } },
+          "type": "textfield",
+          "text": "{var:url}",
+          "focusring": false,
+          "tooltip": "URL ⌘L",
+          "events": [
+            {
+              "triggers": "typingstopped",
+              "action": {
+                "type": "json",
+                "variables": { "url": "{value:self.text}" },
+                "src": { "update": { "ids": { "browser": { "src": "{var:url}" } } } }
+              }
+            },
+            "{file:submit-event.json}"
+          ]
+        },
+        {
+          "id": "titleCount",
+          "constraints": { "size": { "width": 88 }, "position": "left", "grid": { "row": 0, "col": 2 } },
+          "type": "label",
+          "font": { "monospaced": "digits" },
+          "color": "secondaryLabelColor"
+        },
+        {
+          "constraints": { "size": { "height": 22 }, "grid": { "row": 1, "col": 2 } },
+          "type": "button",
+          "shortcut": "⌘↩",
+          "text": "Submit",
+          "tooltip": "Submit ⌘↩",
+          "events": [ "{file:submit-event.json}" ]
+        },
+        {
+          "id": "browser",
+          "constraints": { "size": { "height": 600 }, "grid": { "row": 2, "col": 0, "colspan": 4, "rowweight": 1 } },
+          "type": "webkitview",
+          "src": "{var:url}"
+        }
+      ]
+    }
+  }
+}
